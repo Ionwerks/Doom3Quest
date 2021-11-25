@@ -11001,6 +11001,13 @@ void idPlayer::Move( void ) {
 
                     movedRemainder = (newBodyOrigin - movedBodyOrigin);
 
+                    // Defunkt...
+                    // NB: Not clear to me what the purpose of leanOffset is, something to do with pushing against walls. The related blanking (to prevent looking through walls)
+                    //     doesn't appear to work as far as I can tell. Whatever the intention the vertical component frequently ends up with a stuck offset when traversing stairs.
+                    //     Easiest work-around for now would seem to be zeroing any vertical value preserving the intended functionality (whatever it is) in the horizontal only.
+                    movedRemainder[2] = 0.00f;
+                    // ...Defunkt
+
                     if ( movedRemainder.Length() > commonVr->motionMoveDelta.Length() * 0.25f )
                     {
                         commonVr->isLeaning = true;
